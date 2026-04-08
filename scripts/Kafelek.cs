@@ -3,6 +3,7 @@ using UnityEngine;
 public class Kafelek : MonoBehaviour
 {
     [SerializeField] public Punkt pozycja_na_siatce { get; set; }
+    public int typ;
 
     public Vector3 Srodek
     {
@@ -12,10 +13,11 @@ public class Kafelek : MonoBehaviour
         }
     }
 
-    public void Setup(Punkt pozycja)
+    public void Setup(Punkt pozycja, int typ)
     {
         transform.SetParent(GameObject.FindGameObjectWithTag("Mapa").transform);
         this.pozycja_na_siatce = pozycja;
+        this.typ = typ;
     }
 
     private void OnMouseOver()

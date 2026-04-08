@@ -8,6 +8,10 @@ public class LevelManager : MonoBehaviour
     [SerializeField] CameraManager cameraManager;
     public Dictionary<Punkt,Kafelek> Kafelki { get; set; }
 
+    public int mapa_wysokosc;
+    public int mapa_szerokosc;
+
+
     void Start()
     {
         StworzPoziom();
@@ -25,8 +29,8 @@ public class LevelManager : MonoBehaviour
 
         Vector3 start_kafelek = new Vector3(-6.24f, 4.37f, 0);
 
-        int mapa_wysokosc = daneMapy[0].ToCharArray().Length;
-        int mapa_szerokosc = daneMapy.Length;
+        mapa_wysokosc = daneMapy[0].ToCharArray().Length;
+        mapa_szerokosc = daneMapy.Length;
 
         Vector3 pozycja = new Vector3(0, 0);
 
@@ -54,7 +58,7 @@ public class LevelManager : MonoBehaviour
 
         GameObject nowy_kafelek = Instantiate(kafelki[numer_kafelka]);
 
-        nowy_kafelek.GetComponent<Kafelek>().Setup(indeksy);
+        nowy_kafelek.GetComponent<Kafelek>().Setup(indeksy, numer_kafelka);
 
         nowy_kafelek.transform.position = pozycja;
 
