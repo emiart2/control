@@ -1,0 +1,26 @@
+GraphicsWindow.BackgroundColor = "Black"
+prawo = 750
+GraphicsWindow.Width = prawo
+dol = 500
+GraphicsWindow.Height = dol
+gora = 0
+lewo = 0
+
+'PIŁECZKA
+GraphicsWindow.BrushColor = "Red"
+pilka = Shapes.AddEllipse(30,30) 
+x_pilka = prawo/2      'polozenie pilki na osi x
+y_pilka = dol/2        'polozenie  pilki na osi y
+px_pilka = 10          'przesuniecie po x
+py_pilka = 10          'przesuniecie po y
+
+
+Timer.Interval = 100
+Timer.Tick = RuchPilki
+
+Sub RuchPilki
+  Shapes.Move(pilka, x_pilka, y_pilka)
+  x_pilka = 
+  y_pilka = 
+EndSub
+
