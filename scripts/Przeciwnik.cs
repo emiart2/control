@@ -9,7 +9,6 @@ public class Przeciwnik : MonoBehaviour
     void Start()
     {
         wm = FindFirstObjectByType< WaypointsManager > ();
-        print(wm.punkty_kontrolne[0]);
     }
 
     // Update is called once per frame
