@@ -1,0 +1,88 @@
+GraphicsWindow.BackgroundColor = "Black"
+prawo = 750
+GraphicsWindow.Width = prawo
+dol = 500
+GraphicsWindow.Height = dol
+gora = 0
+lewo = 0
+
+'PIŁECZKA
+GraphicsWindow.BrushColor = "Red"
+pilka = Shapes.AddEllipse(30,30) 
+x_pilka = prawo/2      'polozenie pilki na osi x
+y_pilka = dol/2        'polozenie  pilki na osi y
+px_pilka = 5           'przesuniecie po x
+py_pilka = 5           'przesuniecie po y
+
+Sub Reset
+  x_pilka = prawo/2      
+  y_pilka = dol/2        
+EndSub
+
+Sub RuchPilki
+  x_pilka = x_pilka + px_pilka
+  y_pilka = y_pilka + py_pilka
+  
+  If x_pilka<=lewo Or x_pilka >= prawo Then
+    Reset()
+  EndIf
+  If y_pilka <= gora Or y_pilka>=dol Then
+    py_pilka = -py_pilka
+  EndIf
+  Shapes.Move(pilka, x_pilka, y_pilka)
+EndSub
+
+'PALETKI
+GraphicsWindow.BrushColor = "White"
+paletka1 = Shapes.AddRectangle(50,200)
+paletka2 = Shapes.AddRectangle(50,200)
+
+x_paletka1 = 0
+x_paletka2 = prawo - 50
+y_paletka1 = 0
+y_paletka2 = 0
+
+py_paletki = 10
+
+Shapes.Move(paletka1, x_paletka1,y_paletka1)
+Shapes.Move(paletka2, x_paletka2,y_paletka2)
+
+GraphicsWindow.KeyDown = RuchPaletek
+
+Sub RuchPaletek
+  ostatni_klawisz = GraphicsWindow.LastKey
+  If ostatni_klawisz = "Up" Then
+    y_paletka2 = y_paletka2 - py_paletki
+  Elseif ostatni_klawisz = "Down" Then
+    y_paletka2 = y_paletka2 + py_paletki
+  Elseif ostatni_klawisz = "W" Then
+    y_paletka1 = y_paletka1 - py_paletki
+  Elseif ostatni_klawisz = "S" Then
+    y_paletka1 = y_paletka1 + py_paletki  
+  EndIf
+  Shapes.Move(paletka1, x_paletka1,y_paletka1)
+  Shapes.Move(paletka2, x_paletka2,y_paletka2)
+EndSub
+
+Sub kolizje
+  If (y_pilka > y_paletka1 And y_pilka < y_paletka1 + 200) And (x_pilka <= x_paletka1 + 50) Then
+    px_pilka = -px_pilka
+  EndIf
+
+  If (y_pilka > y_paletka2 And y_pilka < y_paletka2 + 200) And (x_pilka >= x_paletka2) Then
+    px_pilka = -px_pilka
+  EndIf
+
+EndSub
+
+
+
+'ODPALENIE GRY
+
+Timer.Interval =20
+Timer.Tick = Gra
+
+Sub Gra
+  RuchPilki()
+  kolizje()
+EndSub
