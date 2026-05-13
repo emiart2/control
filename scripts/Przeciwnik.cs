@@ -3,12 +3,14 @@ using UnityEngine;
 public class Przeciwnik : MonoBehaviour
 {
     private WaypointsManager wm;
-    private float predkosc = 5f;
+    [SerializeField] private float predkosc = 3f;
+    public bool Zyje { get; set; }
 
     private int obecny_punkt = 0;
     void Start()
     {
         wm = FindFirstObjectByType< WaypointsManager > ();
+        Zyje = true;
     }
 
     // Update is called once per frame
