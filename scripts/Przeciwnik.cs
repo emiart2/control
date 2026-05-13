@@ -4,6 +4,7 @@ public class Przeciwnik : MonoBehaviour
 {
     private WaypointsManager wm;
     [SerializeField] private float predkosc = 3f;
+    private float hp = 10;
     public bool Zyje { get; set; }
 
     private int obecny_punkt = 0;
@@ -37,5 +38,16 @@ public class Przeciwnik : MonoBehaviour
             }
         }
         transform.Translate(kierunek.normalized * dystans);
+    }
+
+    public void Obrazenia(float dmg)
+    {
+        hp -= dmg;
+
+        if(dmg <= 0)
+        {
+            Zyje = false;
+            Destroy(gameObject);
+        }
     }
 }

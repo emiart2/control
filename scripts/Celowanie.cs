@@ -8,6 +8,9 @@ public class Celowanie : MonoBehaviour
     private Queue<Przeciwnik> cele = new Queue<Przeciwnik>();
     [SerializeField] private GameObject prefabPocisku;
 
+    private float odstep = 1f;
+    private float pozostaly_czas = 0f;
+
     private void Update()
     {
         Atakuj();
@@ -35,8 +38,15 @@ public class Celowanie : MonoBehaviour
         {
             cel = cele.Dequeue();
         }
-        Strzelaj();
-        
+
+        pozostaly_czas -= Time.deltaTime;
+
+        if(pozostaly_czas <= 0)
+        {
+            pozostaly_czas = odstep;
+            Strzelaj();
+        }
+  
     }
     private void Strzelaj()
     {

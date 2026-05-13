@@ -5,6 +5,7 @@ public class Pocisk : MonoBehaviour
 {
     private Przeciwnik mojCel;
     [SerializeField] private float predkosc = 5f;
+    float obrazenia = 5f;
      void Start()
     {
         
@@ -39,6 +40,7 @@ public class Pocisk : MonoBehaviour
     {
         if(collision.tag == "Potwor")
         {
+            collision.GetComponent<Przeciwnik>().Obrazenia(obrazenia);
             Destroy(gameObject);
         }
     }
