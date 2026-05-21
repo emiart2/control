@@ -1,0 +1,74 @@
+GraphicsWindow.Width = 400
+GraphicsWindow.Height =550
+GraphicsWindow.BackgroundColor = "White"
+GraphicsWindow.CanResize = "False"
+
+'OBRAZEK =====================================================
+obrazek = ImageList.LoadImage("C:\Users\admin\Desktop\Emilka\small_basic\capibara.png")
+kapibara = Shapes.AddImage(obrazek)
+
+Shapes.Zoom(kapibara,0.3,0.3)
+Shapes.Move(kapibara,-200,-200)
+
+'GUZIKI ======================================================
+guzik1 = Controls.AddButton("Ulepszenie klik  ", 75,350)
+guzik2 = Controls.AddButton("Ulepszenie auto", 200,350)
+
+Controls.SetSize(guzik1, 120,75)
+Controls.SetSize(guzik2, 120,75)
+
+'ZMIENNE ===================================================
+punkty = 0
+punkty_klik = 1
+punkty_auto = 0
+
+cena_klik = 10
+cena_auto = 50
+
+'AKTUALIZOWANIE TEKSTÓW ========================================
+
+Sub UpdatePunkty
+  Shapes.Remove(TekstPunkty)
+  TekstPunkty = Shapes.AddText(punkty)
+  Shapes.Move(TekstPunkty, 200,30)
+  Shapes.Zoom(TekstPunkty,5,5)
+EndSub
+UpdatePunkty()
+
+'DODAWANIE PUNKTU PO KLIKNIĘCIU ==============================
+GraphicsWindow.MouseDown = klikniecieMyszy
+
+Sub klikniecieMyszy
+  mx = GraphicsWindow.MouseX
+  my = GraphicsWindow.MouseY
+  'TextWindow.WriteLine(mx)
+  'TextWindow.WriteLine(my)
+  
+  If mx> 84 And mx <= 320 And my>84 And my <= 320 Then
+    punkty = punkty + punkty_klik
+    UpdatePunkty()
+   EndIf 
+EndSub
+
+'PRZYCISKI ===================================================
+Controls.ButtonClicked = ObslugaGuzikow
+
+Sub KupowanieKlik
+  
+EndSub
+
+Sub KupowanieAuto
+  
+EndSub
+
+Sub ObslugaGuzikow
+  ostatniGuzik = Controls.LastClickedButton
+
+  If ostatniGuzik = guzik1 Then
+    KupowanieKlik()
+  ElseIf ostatniGuzik = guzik2  Then
+    KupowanieAuto()
+  EndIf
+  
+EndSub
+  
